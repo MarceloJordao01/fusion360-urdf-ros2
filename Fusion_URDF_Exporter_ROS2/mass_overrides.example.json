@@ -1,0 +1,5 @@
+{
+  "_comment": "Copie para mass_overrides.json (mesma pasta) e ajuste. Chave = nome do componente sem versao (ex.: 'MX-106T v4' -> 'MX-106T'). Valor = massa REAL em kg; a inercia da peca e escalada na mesma proporcao. Util para pecas compradas (servos, computador) cujo modelo nao tem material correto.",
+  "MX-106T": 0.153,
+  "MX-64AT_AR": 0.135
+}

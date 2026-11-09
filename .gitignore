@@ -1,2 +1,4 @@
 __pycache__
 .vscode/
+Fusion_URDF_Exporter_ROS2/export_settings.json
+Fusion_URDF_Exporter_ROS2/mass_overrides.json

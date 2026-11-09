@@ -49,7 +49,7 @@ def write_link_urdf(joints_dict, repo, links_xyz_dict, file_name, inertial_dict)
         for joint in joints_dict:
             name = joints_dict[joint]['child']
             center_of_mass = \
-                [ i-j for i, j in zip(inertial_dict[name]['center_of_mass'], joints_dict[joint]['xyz'])]
+                [ round(i-j, 6) for i, j in zip(inertial_dict[name]["center_of_mass"], joints_dict[joint]["xyz"])]
             link = Link.Link(name=name, xyz=joints_dict[joint]['xyz'],\
                 center_of_mass=center_of_mass,\
                 repo=repo, mass=inertial_dict[name]['mass'],\

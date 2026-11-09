@@ -1,5 +1,27 @@
 # Autodesk Fusion 360 to URDF for ROS 2
 
+> **Fork notes (MarceloJordao01)** — this fork reads assemblies the way they are usually built,
+> instead of requiring a flat, specially prepared design:
+>
+> * **Nested and linked sub-assemblies** are supported: every joint in the whole tree is read
+>   (`rootComponent.allJoints`), not only the joints of the root component.
+> * **Rigid** joints / rigid groups merge parts into one URDF link; **Revolute** → `revolute`
+>   (with limits) or `continuous`; **Slider** → `prismatic`. Parts with no joint at all
+>   (screws, nuts…) are attached to the nearest part of the same sub-assembly.
+> * Parent/child is found by a BFS from the base, so **the selection order of the joint in Fusion
+>   does not matter**. Loops and unsupported joint types are reported instead of breaking the export.
+> * **No `base_link` component needed**: you type (part of) the name of a base part, e.g. `torax`.
+> * **Front axis option** (`+X`, `-X`, `+Y`, `-Y`): the robot is rotated on export so it faces +X (ROS).
+> * **The design is not modified**: bodies are exported one by one and merged/transformed in Python
+>   (upstream copied every component and renamed the originals to `old_component`).
+> * Optional `mass_overrides.json` (see `mass_overrides.example.json`) to set the real mass of bought
+>   parts (servos, computers) whose CAD has no proper material.
+> * An `export_report.txt` with links, joints, masses and warnings is written into the package.
+>
+> Link names are `<sub-assembly prefix>_<child component>` (e.g. `perna_direita_MX_106T`);
+> joint names are `<child link>_joint`. Fusion keeps the zero pose: export with the robot in the pose
+> that should be `q = 0`.
+
 ## Table of Contents
 
 1. [Introduction](#introduction)  
